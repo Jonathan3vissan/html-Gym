@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="../css/inicio.css">
+</head>
+<body>
+    <header>
+        <h1>Inicio</h1>
+    </header>
+
+    <nav>
+        <button onclick="mostrarContenido('membresias')">Mostrar Membresías</button>
+        <button onclick="mostrarContenido('registrarCliente')">Registrar Cliente</button>
+        <button onclick="mostrarContenido('inventario')">Inventario</button>
+        <button onclick="cerrarSesion()">Cerrar Sesión</button>
+    </nav>
+
+    <div id="membresias" class="seccion-contenido">
+        <h2>Membresías</h2>
+        <p>Aquí puedes ver las diferentes opciones de membresías disponibles.</p>
+    </div>
+
+    <div id="registrarCliente" class="seccion-contenido">
+        <h2>Registrar Cliente</h2>
+        <p>Aquí puedes registrar un nuevo cliente en el sistema.</p>
+    </div>
+
+    <div id="inventario" class="seccion-contenido">
+        <h2>Inventario</h2>
+        <p>Aquí puedes gestionar el inventario de productos.</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
