@@ -1,39 +1,60 @@
 // Función para mostrar contenido al cambiar entre secciones
 function mostrarContenido(seccion) {
-    // Ocultar todas las secciones
     const secciones = document.querySelectorAll('.seccion-contenido');
     secciones.forEach(seccion => seccion.style.display = 'none');
 
-    // Mostrar la sección seleccionada
     const seccionMostrar = document.getElementById(seccion);
     if (seccionMostrar) {
         seccionMostrar.style.display = 'block';
     }
 }
-
-// Función para obtener los datos de los clientes desde la API
+/**
+ * obtiene los clientes registrados
+ */
 async function obtenerClientes() {
     try {
-        // Hacer la solicitud a la API
         const respuesta = await fetch('http://localhost:3000/api/usuarios');
-        
         if (respuesta.ok) {
             const clientes = await respuesta.json();
-
-            // Mostrar los datos de los clientes en la sección de Membresías
             const membresiasSeccion = document.getElementById('membresias');
-            membresiasSeccion.innerHTML = '<h2>Membresías</h2><p>Aquí puedes ver las diferentes opciones de membresías disponibles.</p>';
-            
-            // Crear una lista de los clientes
-            const listaClientes = document.createElement('ul');
+            membresiasSeccion.innerHTML = '<h2>Clientes Registrados</h2><p>Aquí puedes ver los datos de los clientes.</p>';
+
+            // Crear la tabla
+            const tabla = document.createElement('table');
+            tabla.classList.add('tabla-clientes'); // Añadir una clase para estilo (opcional)
+
+            // Crear el encabezado de la tabla
+            const encabezado = document.createElement('thead');
+            const filaEncabezado = document.createElement('tr');
+            filaEncabezado.innerHTML = `
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+            `;
+            encabezado.appendChild(filaEncabezado);
+            tabla.appendChild(encabezado);
+
+            // Crear el cuerpo de la tabla
+            const cuerpo = document.createElement('tbody');
             clientes.forEach(cliente => {
-                const clienteElemento = document.createElement('li');
-                clienteElemento.textContent = `${cliente.Nombre} ${cliente.Apellido} - ${cliente.Mail}`;
-                listaClientes.appendChild(clienteElemento);
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${cliente.Nombre}</td>
+                    <td>${cliente.Apellido}</td>
+                    <td>${cliente.DNI}</td>
+                    <td>${cliente.Mail}</td>
+                    <td>${cliente.Telefono}</td>
+                `;
+                cuerpo.appendChild(fila);
             });
 
-            // Añadir la lista de clientes a la sección de Membresías
-            membresiasSeccion.appendChild(listaClientes);
+            // Añadir el cuerpo de la tabla a la tabla
+            tabla.appendChild(cuerpo);
+
+            // Añadir la tabla de clientes a la sección de Membresías
+            membresiasSeccion.appendChild(tabla);
         } else {
             console.error('Error al obtener los clientes:', respuesta.statusText);
             alert('No se pudieron cargar los clientes. Intenta más tarde.');
