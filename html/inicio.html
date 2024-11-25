@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="../css/inicio.css">
 </head>
+
 <body>
     <header>
         <h1>Inicio</h1>
     </header>
 
     <nav>
-        <button onclick="mostrarContenido('membresias')">Mostrar Membresías</button>
-        <button onclick="mostrarContenido('registrarCliente')">Registrar Cliente</button>
-        <button onclick="mostrarContenido('inventario')">Inventario</button>
+        <button id="btnMostrarMembresias">Mostrar Membresías</button>
+        <button id="btnRegistrarCliente">Registrar Cliente</button>
+        <button id="btnInventario">Inventario</button>
         <button onclick="cerrarSesion()">Cerrar Sesión</button>
     </nav>
 
@@ -33,6 +35,8 @@
         <p>Aquí puedes gestionar el inventario de productos.</p>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="../js/obtenerCliente.js"></script>
+
 </body>
+
 </html>
