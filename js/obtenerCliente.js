@@ -7,7 +7,99 @@ function mostrarContenido(seccion) {
     if (seccionMostrar) {
         seccionMostrar.style.display = 'block';
     }
+
+    // Si se selecciona la sección 'registrarCliente', mostrar el formulario
+    if (seccion === 'registrarCliente') {
+        mostrarFormularioRegistro();  // Mostrar el formulario de registro
+    }
 }
+
+/**
+ * Muestra el formulario de registro para el cliente
+ */
+function mostrarFormularioRegistro() {
+    const registrarClienteSeccion = document.getElementById('registrarCliente');
+    
+    // Limpiar la sección antes de agregar el formulario
+    registrarClienteSeccion.innerHTML = '<h2>Registrar Cliente</h2><p>Aquí puedes registrar un nuevo cliente en el sistema.</p>';
+    
+    // Crear el formulario para el registro del cliente
+    const formularioHTML = `
+        <form id="formularioRegistroCliente">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required><br><br>
+            
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required><br><br>
+    
+            <label for="dni">DNI:</label>
+            <input type="text" id="dni" name="dni" required><br><br>
+    
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" required><br><br>
+    
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" name="telefono" required><br><br>
+    
+            <button type="submit">Registrar Cliente</button>
+        </form>
+    `;
+
+    // Insertar el formulario en la sección correspondiente
+    registrarClienteSeccion.innerHTML += formularioHTML;
+
+    // Asociar el evento 'submit' del formulario con la función que manejará el registro
+    document.getElementById('formularioRegistroCliente').addEventListener('submit', registrarCliente);
+}
+
+/**
+ * Función para registrar al cliente
+ */
+async function registrarCliente(event) {
+    event.preventDefault();  // Evita que el formulario se envíe de manera tradicional
+
+    // Tomar los datos del formulario
+    const nombre = document.getElementById('nombre').value;
+    const apellido = document.getElementById('apellido').value;
+    const dni = document.getElementById('dni').value;
+    const email = document.getElementById('email').value;
+    const telefono = document.getElementById('telefono').value;
+
+    // Crear un objeto con los datos del cliente
+    const datosCliente = {
+        nombre: nombre,
+        apellido: apellido,
+        dni: dni,
+        mail: email,
+        telefono: telefono
+    };
+
+    try {
+        // Enviar los datos al servidor usando fetch (POST)
+        const respuesta = await fetch('http://localhost:3000/api/usuarios', {
+            method: 'POST',  // El método de la solicitud es POST
+            headers: {
+                'Content-Type': 'application/json'  // El cuerpo de la solicitud está en formato JSON
+            },
+            body: JSON.stringify(datosCliente)  // Convertimos el objeto JavaScript en JSON
+        });
+
+        if (respuesta.ok) {
+            const data = await respuesta.json();  // Obtener la respuesta como JSON
+            alert(`Cliente creado con éxito. ID: ${data.id}`);  // Mostrar mensaje de éxito
+
+            // Limpiar el formulario después de registrar al cliente
+            document.getElementById('formularioRegistroCliente').reset();
+        } else {
+            const errorData = await respuesta.json();
+            alert(`Error al registrar el cliente: ${errorData.message}`);
+        }
+    } catch (error) {
+        console.error('Error al enviar la solicitud:', error);
+        alert('Hubo un problema al registrar el cliente. Intenta más tarde.');
+    }
+}
+
 /**
  * obtiene los clientes registrados
  */
