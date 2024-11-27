@@ -1,29 +1,24 @@
-// Función para mostrar contenido al cambiar entre secciones
+/**
+ * Función para mostrar contenido al cambiar entre secciones
+ * @param {Object} seccion 
+ */
 function mostrarContenido(seccion) {
     const secciones = document.querySelectorAll('.seccion-contenido');
     secciones.forEach(seccion => seccion.style.display = 'none');
-
     const seccionMostrar = document.getElementById(seccion);
     if (seccionMostrar) {
         seccionMostrar.style.display = 'block';
     }
-
-    // Si se selecciona la sección 'registrarCliente', mostrar el formulario
     if (seccion === 'registrarCliente') {
-        mostrarFormularioRegistro();  // Mostrar el formulario de registro
+        mostrarFormularioRegistro();  
     }
 }
-
 /**
  * Muestra el formulario de registro para el cliente
  */
 function mostrarFormularioRegistro() {
     const registrarClienteSeccion = document.getElementById('registrarCliente');
-    
-    // Limpiar la sección antes de agregar el formulario
     registrarClienteSeccion.innerHTML = '<h2>Registrar Cliente</h2><p>Aquí puedes registrar un nuevo cliente en el sistema.</p>';
-    
-    // Crear el formulario para el registro del cliente
     const formularioHTML = `
         <form id="formularioRegistroCliente">
             <label for="nombre">Nombre:</label>
@@ -45,27 +40,21 @@ function mostrarFormularioRegistro() {
         </form>
     `;
 
-    // Insertar el formulario en la sección correspondiente
     registrarClienteSeccion.innerHTML += formularioHTML;
-
-    // Asociar el evento 'submit' del formulario con la función que manejará el registro
     document.getElementById('formularioRegistroCliente').addEventListener('submit', registrarCliente);
 }
-
 /**
  * Función para registrar al cliente
  */
 async function registrarCliente(event) {
-    event.preventDefault();  // Evita que el formulario se envíe de manera tradicional
+    event.preventDefault();  
 
-    // Tomar los datos del formulario
     const nombre = document.getElementById('nombre').value;
     const apellido = document.getElementById('apellido').value;
     const dni = document.getElementById('dni').value;
     const email = document.getElementById('email').value;
     const telefono = document.getElementById('telefono').value;
 
-    // Crear un objeto con los datos del cliente
     const datosCliente = {
         nombre: nombre,
         apellido: apellido,
@@ -75,20 +64,17 @@ async function registrarCliente(event) {
     };
 
     try {
-        // Enviar los datos al servidor usando fetch (POST)
         const respuesta = await fetch('http://localhost:3000/api/usuarios', {
-            method: 'POST',  // El método de la solicitud es POST
+            method: 'POST',  
             headers: {
-                'Content-Type': 'application/json'  // El cuerpo de la solicitud está en formato JSON
+                'Content-Type': 'application/json'  
             },
-            body: JSON.stringify(datosCliente)  // Convertimos el objeto JavaScript en JSON
+            body: JSON.stringify(datosCliente)  
         });
 
         if (respuesta.ok) {
-            const data = await respuesta.json();  // Obtener la respuesta como JSON
-            alert(`Cliente creado con éxito. ID: ${data.id}`);  // Mostrar mensaje de éxito
-
-            // Limpiar el formulario después de registrar al cliente
+            const data = await respuesta.json();  
+            alert(`Cliente creado con  éxito em el archivo obtnere cliente. ID: ${data.id}`);  
             document.getElementById('formularioRegistroCliente').reset();
         } else {
             const errorData = await respuesta.json();
@@ -99,7 +85,6 @@ async function registrarCliente(event) {
         alert('Hubo un problema al registrar el cliente. Intenta más tarde.');
     }
 }
-
 /**
  * obtiene los clientes registrados
  */
@@ -111,11 +96,9 @@ async function obtenerClientes() {
             const membresiasSeccion = document.getElementById('membresias');
             membresiasSeccion.innerHTML = '<h2>Clientes Registrados</h2><p>Aquí puedes ver los datos de los clientes.</p>';
 
-            // Crear la tabla
             const tabla = document.createElement('table');
-            tabla.classList.add('tabla-clientes'); // Añadir una clase para estilo (opcional)
+            tabla.classList.add('tabla-clientes'); 
 
-            // Crear el encabezado de la tabla
             const encabezado = document.createElement('thead');
             const filaEncabezado = document.createElement('tr');
             filaEncabezado.innerHTML = `
@@ -128,7 +111,6 @@ async function obtenerClientes() {
             encabezado.appendChild(filaEncabezado);
             tabla.appendChild(encabezado);
 
-            // Crear el cuerpo de la tabla
             const cuerpo = document.createElement('tbody');
             clientes.forEach(cliente => {
                 const fila = document.createElement('tr');
@@ -142,10 +124,8 @@ async function obtenerClientes() {
                 cuerpo.appendChild(fila);
             });
 
-            // Añadir el cuerpo de la tabla a la tabla
             tabla.appendChild(cuerpo);
 
-            // Añadir la tabla de clientes a la sección de Membresías
             membresiasSeccion.appendChild(tabla);
         } else {
             console.error('Error al obtener los clientes:', respuesta.statusText);
@@ -157,24 +137,20 @@ async function obtenerClientes() {
     }
 }
 
-// Asignar los eventos de los botones dentro del archivo JS
 document.addEventListener('DOMContentLoaded', () => {
-    // Event listener para mostrar la sección de Membresías
     const btnMostrarMembresias = document.getElementById('btnMostrarMembresias');
     if (btnMostrarMembresias) {
         btnMostrarMembresias.addEventListener('click', () => {
             mostrarContenido('membresias');
-            obtenerClientes();  // Llamar a la función para cargar los datos de clientes
+            obtenerClientes();
         });
     }
 
-    // Event listener para mostrar la sección de Registrar Cliente
     const btnRegistrarCliente = document.getElementById('btnRegistrarCliente');
     if (btnRegistrarCliente) {
         btnRegistrarCliente.addEventListener('click', () => mostrarContenido('registrarCliente'));
     }
 
-    // Event listener para mostrar la sección de Inventario
     const btnInventario = document.getElementById('btnInventario');
     if (btnInventario) {
         btnInventario.addEventListener('click', () => mostrarContenido('inventario'));

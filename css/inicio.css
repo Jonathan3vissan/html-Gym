@@ -4,17 +4,15 @@
     box-sizing: border-box;
     font-family: 'Arial', sans-serif;
 }
-
 body {
     background-color: #F0F4F8;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centrado horizontal */
-    justify-content: flex-start; /* Alineación hacia la parte superior */
+    align-items: center; 
+    justify-content: flex-start; 
     height: 100vh;
-    padding-top: 20px; /* Espacio superior */
+    padding-top: 20px; 
 }
-
 header {
     background-color: #3498DB;
     color: white;
@@ -23,19 +21,16 @@ header {
     padding: 15px;
     margin-bottom: 20px;
 }
-
 h1 {
     font-size: 26px;
     color: white;
     margin: 0;
 }
-
 nav {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
 }
-
 nav button {
     background-color: #3498DB;
     color: white;
@@ -46,11 +41,9 @@ nav button {
     margin: 0 5px;
     border-radius: 5px;
 }
-
 nav button:hover {
     background-color: #2980B9;
 }
-
 .seccion-contenido {
     display: none;
     padding: 20px;
@@ -62,12 +55,10 @@ nav button:hover {
     max-width: 800px;
     text-align: center;
 }
-
 .seccion-contenido h2 {
     color: #34495E;
     margin-bottom: 15px;
 }
-
 .seccion-contenido p {
     color: #7F8C8D;
     font-size: 16px;
