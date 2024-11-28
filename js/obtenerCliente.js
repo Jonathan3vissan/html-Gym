@@ -168,7 +168,8 @@ window.onload = function () {
 async function modificarCliente(id) {
     const formularioActualizar = document.createElement("form");
     formularioActualizar.setAttribute("id", "mi-fomulario");
-    formularioActualizar.setAttribute("action", "http://127.0.0.1:5500/html/inicio.html");
+//   formularioActualizar.id="mi-formulario" 
+   formularioActualizar.setAttribute("action", "http://127.0.0.1:5500/html/inicio.html");
     formularioActualizar.setAttribute("method", "PUT");
 
     const nombreNuevo = document.createElement("input");
