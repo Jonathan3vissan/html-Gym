@@ -240,6 +240,9 @@ async function modificarCliente(id) {
         } else {
             alert("Hubo un error al actualizar el cliente");
         }
+
+        formularioActualizar.style.display = "none";
+
     });
 }
 
