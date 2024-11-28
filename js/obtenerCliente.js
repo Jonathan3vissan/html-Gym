@@ -10,7 +10,7 @@ function mostrarContenido(seccion) {
         seccionMostrar.style.display = 'block';
     }
     if (seccion === 'registrarCliente') {
-        mostrarFormularioRegistro();  
+        mostrarFormularioRegistro();
     }
 }
 /**
@@ -23,23 +23,17 @@ function mostrarFormularioRegistro() {
         <form id="formularioRegistroCliente">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required><br><br>
-            
             <label for="apellido">Apellido:</label>
             <input type="text" id="apellido" name="apellido" required><br><br>
-    
             <label for="dni">DNI:</label>
             <input type="text" id="dni" name="dni" required><br><br>
-    
             <label for="email">Correo Electrónico:</label>
             <input type="email" id="email" name="email" required><br><br>
-    
             <label for="telefono">Teléfono:</label>
             <input type="text" id="telefono" name="telefono" required><br><br>
-    
             <button type="submit">Registrar Cliente</button>
         </form>
     `;
-
     registrarClienteSeccion.innerHTML += formularioHTML;
     document.getElementById('formularioRegistroCliente').addEventListener('submit', registrarCliente);
 }
@@ -47,14 +41,13 @@ function mostrarFormularioRegistro() {
  * Función para registrar al cliente
  */
 async function registrarCliente(event) {
-    event.preventDefault();  
+    event.preventDefault();
 
     const nombre = document.getElementById('nombre').value;
     const apellido = document.getElementById('apellido').value;
     const dni = document.getElementById('dni').value;
     const email = document.getElementById('email').value;
     const telefono = document.getElementById('telefono').value;
-
     const datosCliente = {
         nombre: nombre,
         apellido: apellido,
@@ -62,19 +55,17 @@ async function registrarCliente(event) {
         mail: email,
         telefono: telefono
     };
-
     try {
         const respuesta = await fetch('http://localhost:3000/api/usuarios', {
-            method: 'POST',  
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/json'  
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(datosCliente)  
+            body: JSON.stringify(datosCliente)
         });
-
         if (respuesta.ok) {
-            const data = await respuesta.json();  
-            alert(`Cliente creado con  éxito em el archivo obtnere cliente. ID: ${data.id}`);  
+            const data = await respuesta.json();
+            alert(`Cliente creado con éxito. ID: ${data.id}`);
             document.getElementById('formularioRegistroCliente').reset();
         } else {
             const errorData = await respuesta.json();
@@ -85,8 +76,9 @@ async function registrarCliente(event) {
         alert('Hubo un problema al registrar el cliente. Intenta más tarde.');
     }
 }
+
 /**
- * obtiene los clientes registrados
+ * Obtiene los clientes registrados
  */
 async function obtenerClientes() {
     try {
@@ -95,10 +87,8 @@ async function obtenerClientes() {
             const clientes = await respuesta.json();
             const membresiasSeccion = document.getElementById('membresias');
             membresiasSeccion.innerHTML = '<h2>Clientes Registrados</h2><p>Aquí puedes ver los datos de los clientes.</p>';
-
             const tabla = document.createElement('table');
-            tabla.classList.add('tabla-clientes'); 
-
+            tabla.classList.add('tabla-clientes');
             const encabezado = document.createElement('thead');
             const filaEncabezado = document.createElement('tr');
             filaEncabezado.innerHTML = `
@@ -107,6 +97,7 @@ async function obtenerClientes() {
                 <th>DNI</th>
                 <th>Correo</th>
                 <th>Teléfono</th>
+                <th>Acción</th>
             `;
             encabezado.appendChild(filaEncabezado);
             tabla.appendChild(encabezado);
@@ -120,12 +111,15 @@ async function obtenerClientes() {
                     <td>${cliente.DNI}</td>
                     <td>${cliente.Mail}</td>
                     <td>${cliente.Telefono}</td>
+                    <td>
+                        <button onclick="modificarCliente(${cliente.id})">Modificar</button>
+                        <button onclick="eliminarFila(${cliente.id})">Eliminar</button>
+                    </td>
                 `;
                 cuerpo.appendChild(fila);
             });
 
             tabla.appendChild(cuerpo);
-
             membresiasSeccion.appendChild(tabla);
         } else {
             console.error('Error al obtener los clientes:', respuesta.statusText);
@@ -156,3 +150,98 @@ document.addEventListener('DOMContentLoaded', () => {
         btnInventario.addEventListener('click', () => mostrarContenido('inventario'));
     }
 });
+
+// Función que realiza la redirección
+function cerrarSesion() {
+    window.location.href = "http://127.0.0.1:5500/index.html";
+}
+
+// Asignamos el evento al botón cuando se carga la página
+window.onload = function () {
+    document.getElementById("btnCerrarSesion").addEventListener("click", cerrarSesion);
+};
+
+/**
+ * Muestra un formulario para actualizar un cliente
+ * @param {Number} id del cliente
+ */
+async function modificarCliente(id) {
+    const formularioActualizar = document.createElement("form");
+    formularioActualizar.setAttribute("id", "mi-fomulario");
+    formularioActualizar.setAttribute("action", "http://127.0.0.1:5500/html/inicio.html");
+    formularioActualizar.setAttribute("method", "PUT");
+
+    const nombreNuevo = document.createElement("input");
+    nombreNuevo.setAttribute("type", "text");
+    nombreNuevo.setAttribute("name", "nombre");
+    nombreNuevo.setAttribute("placeholder", "ingrese nombre");
+    nombreNuevo.required = true;
+
+    const nuevoApellido = document.createElement("input");
+    nuevoApellido.setAttribute("type", "text");
+    nuevoApellido.setAttribute("name", "apellido");
+    nuevoApellido.setAttribute("placeholder", "ingrese  apellido");
+    nuevoApellido.required = true;
+
+    const nuevoDni = document.createElement("input");
+    nuevoDni.setAttribute("type", "text");
+    nuevoDni.setAttribute("name", "dni");
+    nuevoDni.setAttribute("placeholder", "ingrese  DNI");
+    nuevoDni.required = true;
+
+    const nuevoEmail = document.createElement("input");
+    nuevoEmail.setAttribute("type", "email");
+    nuevoEmail.setAttribute("name", "mail");
+    nuevoEmail.setAttribute("placeholder", "ingrese  correo electrónico");
+    nuevoEmail.required = true;
+
+    const nuevoTelefono = document.createElement("input");
+    nuevoTelefono.setAttribute("type", "text");
+    nuevoTelefono.setAttribute("name", "telefono");
+    nuevoTelefono.setAttribute("placeholder", "ingrese  teléfono");
+    nuevoTelefono.required = true;
+
+    const botonEnviar = document.createElement("button");
+    botonEnviar.setAttribute("type", "submit");
+    botonEnviar.textContent = "Enviar modificaciones";
+
+    formularioActualizar.appendChild(nombreNuevo);
+    formularioActualizar.appendChild(nuevoApellido);
+    formularioActualizar.appendChild(nuevoDni);
+    formularioActualizar.appendChild(nuevoEmail);
+    formularioActualizar.appendChild(nuevoTelefono);
+    formularioActualizar.appendChild(botonEnviar);
+
+    document.getElementById("formulario-actualizar").innerHTML = '';
+    document.getElementById("formulario-actualizar").appendChild(formularioActualizar);
+
+    formularioActualizar.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const datosActualizados = {
+            nombre: nombreNuevo.value,
+            apellido: nuevoApellido.value,
+            dni: nuevoDni.value,
+            mail: nuevoEmail.value,
+            telefono: nuevoTelefono.value
+        };
+
+        const respuestaServer = await fetch(`http://localhost:3000/api/usuarios/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datosActualizados)
+        });
+
+        if (respuestaServer.ok) {
+            alert("Cliente actualizado exitosamente");
+            obtenerClientes();
+        } else {
+            alert("Hubo un error al actualizar el cliente");
+        }
+    });
+}
+
+
+

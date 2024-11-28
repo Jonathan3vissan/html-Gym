@@ -7,6 +7,7 @@
     <title>Inicio</title>
     <link rel="stylesheet" href="../css/inicio.css">
     <link rel="stylesheet" href="../css/tablas.css">
+    <link rel="stylesheet" href="../css/perosnalizado.css">
 </head>
 
 <body>
@@ -18,7 +19,7 @@
         <button id="btnMostrarMembresias">Mostrar Clientes</button>
         <button id="btnRegistrarCliente">Registrar Cliente</button>
         <button id="btnInventario">Inventario</button>
-        <button onclick="cerrarSesion()">Cerrar Sesión</button>
+        <button id="btnCerrarSesion" onclick="cerrarSesion()">Cerrar Sesión</button>
     </nav>
 
     <div id="membresias" class="seccion-contenido">
@@ -36,7 +37,12 @@
         <p>Aquí puedes gestionar el inventario de productos.</p>
     </div>
 
-    <script type="module" src="../js/obtenerCliente.js"></script>
+
+    <div id="formulario-actualizar" > 
+    </div>
+
+    <script src="../js/obtenerCliente.js"></script>
+
 
 </body>
 
