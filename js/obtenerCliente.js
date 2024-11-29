@@ -42,7 +42,6 @@ function mostrarFormularioRegistro() {
  */
 async function registrarCliente(event) {
     event.preventDefault();
-
     const nombre = document.getElementById('nombre').value;
     const apellido = document.getElementById('apellido').value;
     const dni = document.getElementById('dni').value;
@@ -76,7 +75,6 @@ async function registrarCliente(event) {
         alert('Hubo un problema al registrar el cliente. Intenta más tarde.');
     }
 }
-
 /**
  * Obtiene los clientes registrados
  */
@@ -101,7 +99,6 @@ async function obtenerClientes() {
             `;
             encabezado.appendChild(filaEncabezado);
             tabla.appendChild(encabezado);
-
             const cuerpo = document.createElement('tbody');
             clientes.forEach(cliente => {
                 const fila = document.createElement('tr');
@@ -118,7 +115,6 @@ async function obtenerClientes() {
                 `;
                 cuerpo.appendChild(fila);
             });
-
             tabla.appendChild(cuerpo);
             membresiasSeccion.appendChild(tabla);
         } else {
@@ -130,7 +126,6 @@ async function obtenerClientes() {
         alert('Hubo un problema al conectar con el servidor.');
     }
 }
-
 document.addEventListener('DOMContentLoaded', () => {
     const btnMostrarMembresias = document.getElementById('btnMostrarMembresias');
     if (btnMostrarMembresias) {
@@ -139,23 +134,19 @@ document.addEventListener('DOMContentLoaded', () => {
             obtenerClientes();
         });
     }
-
     const btnRegistrarCliente = document.getElementById('btnRegistrarCliente');
     if (btnRegistrarCliente) {
         btnRegistrarCliente.addEventListener('click', () => mostrarContenido('registrarCliente'));
     }
-
     const btnInventario = document.getElementById('btnInventario');
     if (btnInventario) {
         btnInventario.addEventListener('click', () => mostrarContenido('inventario'));
     }
 });
-
 // Función que realiza la redirección
 function cerrarSesion() {
     window.location.href = "http://127.0.0.1:5500/index.html";
 }
-
 // Asignamos el evento al botón cuando se carga la página
 window.onload = function () {
     document.getElementById("btnCerrarSesion").addEventListener("click", cerrarSesion);
@@ -225,7 +216,6 @@ async function modificarCliente(id) {
                     },
                     body: JSON.stringify(datosActualizados)
                 });
-
                 if (respuestaServer.ok) {
                     alert("Cliente actualizado exitosamente");
                     obtenerClientes();
@@ -241,6 +231,31 @@ async function modificarCliente(id) {
         formularioActualizar.style.display = "none";
     });
 }
-
-
-
+/**
+ * elimina un cliente del registro de la base de datos
+ * @param {Number} id del cliente a eliminar 
+ */
+async function eliminarFila(id) {
+    const respuesta = confirm("¿Estás seguro de que quieres eliminar este usuario?");
+    if (respuesta) {
+        try {
+            const enviarEliminarCliente = await fetch(`http://localhost:3000/api/usuarios/${id}`, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (enviarEliminarCliente.ok) {
+                alert("cliente eliminado exitosamente");
+                obtenerClientes();
+            } else {
+                alert("ocurrio un error, intente nuevamente mas tarde")
+            }
+        } catch (error) {
+            alert("error inesperado")
+            console.error("error inespedaro :", error)
+        }
+    } else {
+        alert("el cliente no fue eliminado")
+    }
+}
