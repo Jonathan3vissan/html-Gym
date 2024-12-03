@@ -34,8 +34,7 @@ function mostrarFormularioRegistro() {
             <button type="submit">Registrar Cliente</button>
         </form>
     `;
-    registrarClienteSeccion.innerHTML += formularioHTML;
-    document.getElementById('formularioRegistroCliente').addEventListener('submit', registrarCliente);
+  
 }
 /**
  * Función para registrar al cliente
@@ -54,6 +53,7 @@ async function registrarCliente(event) {
         mail: email,
         telefono: telefono
     };
+    console.log("aca esta en registrar cliente com envia los datos\n",datosCliente,"\n este es el tipo de dato ",typeof datosCliente)//hasta aca tod esta bien tomado los datos
     try {
         const respuesta = await fetch('http://localhost:3000/api/usuarios', {
             method: 'POST',
@@ -62,6 +62,8 @@ async function registrarCliente(event) {
             },
             body: JSON.stringify(datosCliente)
         });
+        console.log( "ver tipo de datos ya json",typeof datosCliente,"ver los daots a ver que muestra",datosCliente);
+        
         if (respuesta.ok) {
             const data = await respuesta.json();
             alert(`Cliente creado con éxito. ID: ${data.id}`);
@@ -259,3 +261,5 @@ async function eliminarFila(id) {
         alert("el cliente no fue eliminado")
     }
 }
+
+
