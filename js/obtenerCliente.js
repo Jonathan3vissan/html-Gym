@@ -93,7 +93,7 @@ async function obtenerClientes() {
             const encabezado = document.createElement('thead');
             const filaEncabezado = document.createElement('tr');
             filaEncabezado.innerHTML = `
-                <th>#</th> <!-- Número de cliente -->
+                <th>N°</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>DNI</th>
@@ -107,7 +107,7 @@ async function obtenerClientes() {
             clientes.forEach((cliente, index) => {
                 const fila = document.createElement('tr');
                 fila.innerHTML = `
-                    <td>${index + 1}</td> <!-- Mostrar el número de cliente -->
+                    <td>${index + 1}</td> 
                     <td>${cliente.Nombre}</td>
                     <td>${cliente.Apellido}</td>
                     <td>${cliente.DNI}</td>
