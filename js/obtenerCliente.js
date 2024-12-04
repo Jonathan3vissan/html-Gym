@@ -93,6 +93,7 @@ async function obtenerClientes() {
             const encabezado = document.createElement('thead');
             const filaEncabezado = document.createElement('tr');
             filaEncabezado.innerHTML = `
+                <th>#</th> <!-- Número de cliente -->
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>DNI</th>
@@ -103,9 +104,10 @@ async function obtenerClientes() {
             encabezado.appendChild(filaEncabezado);
             tabla.appendChild(encabezado);
             const cuerpo = document.createElement('tbody');
-            clientes.forEach(cliente => {
+            clientes.forEach((cliente, index) => {
                 const fila = document.createElement('tr');
                 fila.innerHTML = `
+                    <td>${index + 1}</td> <!-- Mostrar el número de cliente -->
                     <td>${cliente.Nombre}</td>
                     <td>${cliente.Apellido}</td>
                     <td>${cliente.DNI}</td>
@@ -129,6 +131,7 @@ async function obtenerClientes() {
         alert('Hubo un problema al conectar con el servidor.');
     }
 }
+
 document.addEventListener('DOMContentLoaded', () => {
     const btnMostrarMembresias = document.getElementById('btnMostrarMembresias');
     if (btnMostrarMembresias) {
