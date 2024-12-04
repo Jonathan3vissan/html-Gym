@@ -38,7 +38,7 @@ function mostrarFormularioRegistro() {
     document.getElementById('formularioRegistroCliente').addEventListener('submit', registrarCliente);
 }
 /**
- * Función para registrar al cliente
+ * registrar nuevo cliente
  */
 async function registrarCliente(event) {
     event.preventDefault();
@@ -54,7 +54,6 @@ async function registrarCliente(event) {
         mail: email,
         telefono: telefono
     };
-    console.log("aca esta en registrar cliente com envia los datos\n",datosCliente,"\n este es el tipo de dato ",typeof datosCliente)//hasta aca tod esta bien tomado los datos
     try {
         const respuesta = await fetch('http://localhost:3000/api/usuarios', {
             method: 'POST',
@@ -149,11 +148,12 @@ document.addEventListener('DOMContentLoaded', () => {
         btnInventario.addEventListener('click', () => mostrarContenido('inventario'));
     }
 });
-// Función que realiza la redirección
+/**
+ *  realiza la redirección
+ */
 function cerrarSesion() {
     window.location.href = "http://127.0.0.1:5500/index.html";
 }
-// Asignamos el evento al botón cuando se carga la página
 window.onload = function () {
     document.getElementById("btnCerrarSesion").addEventListener("click", cerrarSesion);
 };
