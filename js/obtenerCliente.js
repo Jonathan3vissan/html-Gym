@@ -34,7 +34,8 @@ function mostrarFormularioRegistro() {
             <button type="submit">Registrar Cliente</button>
         </form>
     `;
-  
+    registrarClienteSeccion.innerHTML += formularioHTML;
+    document.getElementById('formularioRegistroCliente').addEventListener('submit', registrarCliente);
 }
 /**
  * Función para registrar al cliente
@@ -66,7 +67,7 @@ async function registrarCliente(event) {
         
         if (respuesta.ok) {
             const data = await respuesta.json();
-            alert(`Cliente creado con éxito. ID: ${data.id}`);
+            alert(`Cliente creado con éxito.`);
             document.getElementById('formularioRegistroCliente').reset();
         } else {
             const errorData = await respuesta.json();
