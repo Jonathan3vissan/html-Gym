@@ -1,3 +1,5 @@
+import crearBuscadorDNI from "./buscador.js";
+
 /**
  * Función para mostrar contenido al cambiar entre secciones
  * @param {Object} seccion 
@@ -62,8 +64,8 @@ async function registrarCliente(event) {
             },
             body: JSON.stringify(datosCliente)
         });
-        console.log( "ver tipo de datos ya json",typeof datosCliente,"ver los daots a ver que muestra",datosCliente);
-        
+        console.log("ver tipo de datos ya json", typeof datosCliente, "ver los daots a ver que muestra", datosCliente);
+
         if (respuesta.ok) {
             const data = await respuesta.json();
             alert(`Cliente creado con éxito.`);
@@ -266,4 +268,4 @@ async function eliminarFila(id) {
     }
 }
 
-
+crearBuscadorDNI()
