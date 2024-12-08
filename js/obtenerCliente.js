@@ -268,4 +268,42 @@ async function eliminarFila(id) {
     }
 }
 
+
+// Asignar eventos de click a los botones
+document.getElementById("btnMostrarMembresias").addEventListener("click", function() {
+    mostrarSeccion("membresias");
+});
+
+document.getElementById("btnRegistrarCliente").addEventListener("click", function() {
+    mostrarSeccion("registrarCliente");
+});
+
+document.getElementById("btnBuscarPorDni").addEventListener("click", function() {
+    mostrarSeccion("mostrar-buscador-dni");
+});
+
+document.getElementById("btnInventario").addEventListener("click", function() {
+    mostrarSeccion("inventario");
+});
+
+// Función para mostrar la sección correspondiente y ocultar las demás
+function mostrarSeccion(seccionId) {
+    // Ocultar todas las secciones
+    const secciones = document.querySelectorAll(".seccion-contenido, #mostrar-buscador-dni");
+    secciones.forEach(function(seccion) {
+        seccion.style.display = "none"; // Ocultar cada sección
+    });
+
+    // Mostrar la sección seleccionada
+    const seccionMostrar = document.getElementById(seccionId);
+    if (seccionMostrar) {
+        seccionMostrar.style.display = "block"; // Mostrar la sección
+    }
+}
+
+// Iniciar mostrando una sección por defecto si es necesario
+// Puedes descomentar esta línea para que se muestre "Mostrar Clientes" por defecto al cargar la página:
+// mostrarSeccion("membresias"); 
+
+
 crearBuscadorDNI()
