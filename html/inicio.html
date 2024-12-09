@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
+    <!-- Incluir Font Awesome desde CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../css/inicio.css">
     <link rel="stylesheet" href="../css/tablas.css">
 </head>
@@ -14,19 +16,26 @@
         <h1>Inicio</h1>
     </header>
 
-    <nav>
-        <button id="btnMostrarMembresias">Mostrar Clientes</button>
-        <button id="btnRegistrarCliente">Registrar Cliente</button>
-        <button id="btnInventario">Inventario</button>
-        <button id="btnCerrarSesion" onclick="cerrarSesion()">Cerrar Sesión</button>
-    </nav>
+    <div id="contenerdor-barra-navegacion">
+        <nav>
+            <button id="btnMostrarMembresias">Mostrar Clientes</button>
+            <button id="btnRegistrarCliente">Registrar Cliente</button>
+            <button id="btnInventario">Inventario</button>
+            <button id="btnCerrarSesion" onclick="cerrarSesion()">Cerrar Sesión</button>
+            <!-- Estructura del search con lupa dentro -->
+            <div class="search-container">
+                <input id="barra-buscador" type="search" name="q" placeholder="Buscar cliente por dni" aria-label="Buscar">
+                <i class="fa fa-search search-icon"></i> <!-- Lupa dentro -->
+            </div>
+        </nav>
+    </div>
 
     <div id="membresias" class="seccion-contenido">
         <h2>Clientes Registrados</h2>
         <p>Aquí puedes ver las diferentes opciones de membresías disponibles.</p>
     </div>
 
-    <div id="formulario-actualizar" > 
+    <div id="formulario-actualizar">
     </div>
 
     <div id="registrarCliente" class="seccion-contenido">
@@ -39,10 +48,7 @@
         <p>Aquí puedes gestionar el inventario de productos.</p>
     </div>
 
-
-
     <script src="../js/obtenerCliente.js"></script>
-
 
 </body>
 
