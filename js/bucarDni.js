@@ -23,7 +23,7 @@ async function buscarPorDNI() {
     });
 }
 
-// Función para mostrar la tarjeta del cliente
+// Función para mostrar la tarjeta del cliente con todos los datos
 function mostrarTarjetaCliente(cliente) {
     // Seleccionamos el contenedor de la tarjeta
     const contenedorTarjeta = document.getElementById("clienteEncontrado");
@@ -32,32 +32,31 @@ function mostrarTarjetaCliente(cliente) {
     const nombreElemento = document.getElementById("nombreCliente");
     const apellidoElemento = document.getElementById("apellidoCliente");
     const dniElemento = document.getElementById("dniCliente");
+    const telefonoElemento = document.getElementById("telefonoCliente");
+    const emailElemento = document.getElementById("emailCliente");
+    const direccionElemento = document.getElementById("direccionCliente");
 
     nombreElemento.textContent = `Nombre: ${cliente.Nombre}`;
     apellidoElemento.textContent = `Apellido: ${cliente.Apellido}`;
     dniElemento.textContent = `DNI: ${cliente.DNI}`;
+    telefonoElemento.textContent = `Teléfono: ${cliente.Telefono}`;
+    emailElemento.textContent = `Email: ${cliente.Mail}`;
 
     // Hacemos visible la tarjeta
     contenedorTarjeta.style.display = "block";
 
-    // Ocultamos las otras secciones
-    const secciones = document.querySelectorAll('.seccion-contenido');
-    secciones.forEach(seccion => {
-        seccion.style.display = 'none';
-    });
+    // Ocultamos otras secciones
+    document.getElementById("membresias").style.display = "none";
+    document.getElementById("registrarCliente").style.display = "none";
+    document.getElementById("inventario").style.display = "none";
 }
 
-// Función para cerrar la tarjeta
+// Función para cerrar la tarjeta y volver a mostrar las secciones
 function cerrarTarjeta() {
-    // Ocultamos la tarjeta
-    const contenedorTarjeta = document.getElementById("clienteEncontrado");
-    contenedorTarjeta.style.display = "none";
-
-    // Volvemos a mostrar las secciones ocultas
-    const secciones = document.querySelectorAll('.seccion-contenido');
-    secciones.forEach(seccion => {
-        seccion.style.display = 'block';
-    });
+    document.getElementById("clienteEncontrado").style.display = "none";
+    document.getElementById("membresias").style.display = "block";
+    document.getElementById("registrarCliente").style.display = "block";
+    document.getElementById("inventario").style.display = "block";
 }
 
 // Llamamos a la función para que la búsqueda esté lista cuando la página se haya cargado
