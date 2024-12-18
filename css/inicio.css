@@ -1,110 +1,97 @@
-/* Estilos generales */
-* {
+/* Estilos generales para la página */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-}
-
-body {
-    background-color: #F0F4F8;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: flex-start; 
-    height: 100vh;
-    padding-top: 20px; 
-}
-
-header {
-    background-color: #3498DB;
-    color: white;
-    width: 100%;
-    text-align: center;
-    padding: 15px;
-    margin-bottom: 20px;
-}
-
-h1 {
-    font-size: 26px;
-    color: white;
-    margin: 0;
+    background-color: #f4f4f4;
 }
 
 /* Barra de navegación */
-#contenerdor-barra-navegacion {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
 nav {
+    background-color: #0099cc; /* Celeste original */
+    padding: 10px;
+    color: #fff;
+    text-align: center;
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Centrado de los enlaces */
     align-items: center;
-    margin-bottom: 20px;
+    height: 50px;
 }
 
-/* Botones de la navegación */
-nav button {
-    background-color: #3498DB;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
     margin: 0 5px;
+    display: inline-block;
+}
+
+nav a:hover {
+    background-color: #0077b3; /* Un tono más oscuro del celeste */
     border-radius: 5px;
 }
 
-nav button:hover {
-    background-color: #2980B9;
+/* Título centrado */
+h1 {
+    text-align: center;
+    color: #0099cc; /* Celeste original */
+    margin-top: 0;
+    font-size: 36px;
 }
 
-/* Contenedor de búsqueda */
-.search-container {
-    position: relative;
-    width: 30%;
+/* Estilos para el formulario */
+form {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#barra-buscador {
+input[type="text"], input[type="email"], input[type="tel"] {
     width: 100%;
-    padding: 10px 40px 10px 10px; /* Espacio extra a la izquierda para la lupa */
+    padding: 10px;
+    margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
+    position: relative;
 }
 
-.search-icon {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    font-size: 18px;
-    color: #888;
-    cursor: pointer;
-}
-
-/* Sección de contenido */
-.seccion-contenido {
-    display: block; /* Aseguramos que por defecto estas secciones estén visibles */
-    padding: 20px;
-    margin-top: 20px;
-    background-color: white;
+button {
+    background-color: #0099cc; /* Celeste original */
+    color: white;
+    padding: 10px 20px;
+    border: none;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 800px;
-    text-align: center;
+    cursor: pointer;
+    width: 100%;
 }
 
-.seccion-contenido h2 {
-    color: #34495E;
-    margin-bottom: 15px;
+button:hover {
+    background-color: #0077b3; /* Un tono más oscuro del celeste */
 }
 
-.seccion-contenido p {
-    color: #7F8C8D;
-    font-size: 16px;
+/* Estilos para el icono de búsqueda (lupa) dentro del input */
+.input-busqueda {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-busqueda input[type="text"] {
+    padding-right: 40px; /* Espacio para el icono de la lupa */
+}
+
+.input-busqueda .lupa {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #0099cc; /* Celeste original */
 }
 
 /* Estilos para la tarjeta del cliente */
@@ -114,38 +101,82 @@ nav button:hover {
     padding: 20px;
     margin: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
     text-align: left;
-    display: none; /* Ocultamos la tarjeta por defecto */
+    display: none;
+    position: fixed;
+    top: 40%; /* Ajuste para centrar la tarjeta verticalmente */
+    left: 50%;
+    transform: translateX(-50%); /* Centrado horizontal */
+    z-index: 9999;
 }
 
-.tarjeta-cliente h3 {
-    color: #2c3e50;
+/* Estilo para el título de la tarjeta */
+.tarjeta-cliente h2 {
+    font-size: 24px;
     margin-bottom: 10px;
-    font-size: 22px;
 }
 
+/* Estilos para los detalles del cliente */
 .tarjeta-cliente p {
-    color: #7f8c8d;
+    font-size: 16px;
     margin: 5px 0;
+}
+
+/* Estilos para el contenedor del formulario */
+.contenedor-formulario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+}
+
+/* Estilos para el contenedor de la página principal */
+.contenedor-principal {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Estilo para el mensaje de "Cliente no encontrado" */
+.mensaje-error {
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Estilos para la tabla de clientes */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Estilos para el botón de búsqueda */
+button.buscar {
+    background-color: #0099cc; /* Celeste original */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
     font-size: 16px;
 }
 
-.tarjeta-cliente .dni {
-    font-weight: bold;
-    color: #2980b9;
-}
-
-/* Estilo para el fondo cuando la tarjeta está activa */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: none; /* Estará oculto por defecto */
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+button.buscar:hover {
+    background-color: #0077b3; /* Un tono más oscuro del celeste */
 }

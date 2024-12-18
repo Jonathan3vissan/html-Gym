@@ -18,9 +18,9 @@
 
     <div id="contenerdor-barra-navegacion">
         <nav>
-            <button id="btnMostrarMembresias">Mostrar Clientes</button>
-            <button id="btnRegistrarCliente">Registrar Cliente</button>
-            <button id="btnInventario">Inventario</button>
+            <button id="btnMostrarMembresias" onclick="mostrarSeccion('membresias')">Mostrar Clientes</button>
+            <button id="btnRegistrarCliente" onclick="mostrarSeccion('registrarCliente')">Registrar Cliente</button>
+            <button id="btnInventario" onclick="mostrarSeccion('inventario')">Inventario</button>
             <button id="btnCerrarSesion" onclick="cerrarSesion()">Cerrar Sesión</button>
             
             <!-- Barra de búsqueda sin form -->
@@ -31,17 +31,25 @@
         </nav>
     </div>
 
+    <!-- Secciones -->
     <div id="membresias" class="seccion-contenido">
         <h2>Clientes Registrados</h2>
         <p>Aquí puedes ver las diferentes opciones de membresías disponibles.</p>
     </div>
 
-    <div id="formulario-actualizar">
-    </div>
+    <div id="formulario-actualizar"></div>
 
     <div id="registrarCliente" class="seccion-contenido">
         <h2>Registrar Cliente</h2>
-        <p>Aquí puedes registrar un nuevo cliente en el sistema.</p>
+        <form id="formularioRegistro">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" name="apellido" required>
+            <label for="dni">DNI</label>
+            <input type="text" id="dni" name="dni" required>
+            <button type="submit">Registrar</button>
+        </form>
     </div>
 
     <div id="inventario" class="seccion-contenido">

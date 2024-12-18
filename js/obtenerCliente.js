@@ -27,7 +27,7 @@ function mostrarFormularioRegistro() {
             <input type="text" id="apellido" name="apellido" required><br><br>
             <label for="dni">DNI:</label>
             <input type="text" id="dni" name="dni" required><br><br>
-            <label for="email">Correo Electrónico:</label>
+            <label for="email">Email:</label>
             <input type="email" id="email" name="email" required><br><br>
             <label for="telefono">Teléfono:</label>
             <input type="text" id="telefono" name="telefono" required><br><br>
@@ -96,7 +96,7 @@ async function obtenerClientes() {
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>DNI</th>
-                <th>Correo</th>
+                <th>Email</th>
                 <th>Teléfono</th>
                 <th>Acción</th>
             `;
@@ -267,3 +267,19 @@ async function eliminarFila(id) {
 }
 
 
+// Lógica para abrir y cerrar la tarjeta de cliente
+function mostrarTarjeta(cliente) {
+    const tarjeta = document.getElementById('clienteEncontrado');
+    document.getElementById('nombreCliente').textContent = cliente.nombre;
+    document.getElementById('apellidoCliente').textContent = cliente.apellido;
+    document.getElementById('dniCliente').textContent = cliente.dni;
+    document.getElementById('telefonoCliente').textContent = cliente.telefono;
+    document.getElementById('emailCliente').textContent = cliente.email;
+    document.getElementById('direccionCliente').textContent = cliente.direccion;
+    tarjeta.style.display = 'block';  // Mostrar la tarjeta
+}
+
+function cerrarTarjeta() {
+    const tarjeta = document.getElementById('clienteEncontrado');
+    tarjeta.style.display = 'none';  // Ocultar la tarjeta
+}
